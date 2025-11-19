@@ -1,11 +1,11 @@
-## Anleitung zur Ausführung des Codes im Ordner `02 Pipe`
+## Anleitung zur Ausführung des Codes im Ordner `05 Pipe`
 
 ### 1. **Wechsle in das Hauptverzeichnis**
 
 Navigiere in das Hauptverzeichnis des Projekts:
 
 ```bash
-cd /home/marvin/Desktop/Uni-Trier/2025WEdition/02\ Pipe
+cd /home/marvin/Desktop/Uni-Trier/2025WEdition/05\ Pipe
 ```
 
 ---
