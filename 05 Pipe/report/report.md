@@ -1,6 +1,6 @@
 # Report Abgabe 1
 
-Ich habe zwei verschiedene Arten der Pipe-Latenzmessung implementiert.
+Ich habe zwei verschiedene Arten der Pipe-Latenzmessung implementiert:
 
 ## Messung der Latenz im gleichen Prozess (pipe.cpp)
 
@@ -22,11 +22,11 @@ Die Datei führt folgende Schritte innerhalb einer Schleife aus:
 
 `pipe_fork.cpp`
 
-Diese Implementierung verwendet die `fork()`-Systemaufruf, um einen Kindprozess zu erstellen, der Daten durch die Pipe sendet und empfängt. Diese Methode simuliert eine realistischere Umgebung, in der Daten zwischen zwei separaten Prozessen übertragen werden. Dadurch kann die gemessene Latenz genauer die tatsächlichen Bedingungen widerspiegeln, unter denen Pipes in der Praxis verwendet werden. Allerdings war die Implementierung komplexer und Sie erfordert mehr Ressourcen, da zwei Prozesse beteiligt sind.
+Diese Implementierung verwendet den `fork()`-Systemaufruf, um einen Kindprozess zu erstellen, welcher Daten durch die Pipe sendet und empfängt. Diese Methode simuliert eine realistischere Umgebung, in der Daten zwischen zwei separaten Prozessen übertragen werden. Dadurch kann die gemessene Latenz genauer die tatsächlichen Bedingungen widerspiegeln, unter denen Pipes in der Praxis verwendet werden. Allerdings war die Implementierung komplexer und die Ausführung erfordert mehr Ressourcen, da zwei Prozesse beteiligt sind.
 
 Die Datei führt folgende Schritte aus:
 
-1. Erstellung zwei Pipes für die bidirektionale Kommunikation mittels `pipe()`.
+1. Erstellung zweier Pipes für die bidirektionale Kommunikation mittels `pipe()`.
 2. Erstellung eines Kindprozesses mit `fork()`.
 
 3. Im Elternprozess (in Schleife):
@@ -48,7 +48,8 @@ Die Datei führt folgende Schritte aus:
 
 ### Vorgehensweise
 
-Es wurden jeweils 1.000.000 Messungen durchgeführt. Die Zeitnahme ist über die im Helper bereitgestellte stopwatch realisiert. Gemessen habe ich meinem (schon etwas in die Jahre gekommenem) PC mit 4-Kern Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz. Als OS nutze ich das Arch Linux Derivat CachyOS mit 6.17.7-3-cachyos Kernel. Es verfügt im Gegensatz zum klassischen Linux Kernel unter anderem über einen angepassten Scheduler (Kein Completely Fair Scheduler).
+Es wurden jeweils 1.000.000 Messungen durchgeführt. Die Zeitnahme ist über die - im Helper bereitgestellte - stopwatch realisiert. Gemessen habe ich mit meinem (schon etwas in die Jahre gekommenem) PC mit 4-Kern Intel(R) Core(TM) i5-4590 CPU @ 3.30GHz.
+Als Betriebssystem nutze ich das Arch Linux Derivat CachyOS mit 6.17.7-3-cachyos Kernel. Es verfügt im Gegensatz zum klassischen Linux Kernel unter anderem über einen angepassten Scheduler (Kein Completely Fair Scheduler).
 
 ### Ergebnisse
 
@@ -59,7 +60,7 @@ Es wurden jeweils 1.000.000 Messungen durchgeführt. Die Zeitnahme ist über die
 | pipe.cpp           | 1.2  | 1.09   | 1.071 | 765.98  | 2.756 | 1.227         | 1.284         | 11.063         |
 | icp-pipe.cpp       | 6.71 | 5.49   | 3.26  | 2589.59 | 9.155 | 10.26         | 14.86         | 76.25          |
 
-Es fällt auf, dass die Latenz bei der Messung mit fork() deutlich höher ist als bei der Messung im gleichen Prozess. Dies liegt daran, dass die Kommunikation zwischen zwei Prozessen zusätzliche Overheads verursacht, oder spezifischer zwei zusätzliche Kontextwechsel zwischen den Prozessen notwendig sind.
+Es fällt auf, dass die Latenz bei der Messung mit fork() deutlich höher ist als bei der Messung im gleichen Prozess. Dies liegt daran, dass die Kommunikation zwischen zwei Prozessen zusätzliche Overheads verursacht, oder spezifischer zwei zusätzliche Kontextwechsel notwendig sind.
 
 ### Plots
 
@@ -73,7 +74,7 @@ Es fällt auf, dass die Latenz bei der Messung mit fork() deutlich höher ist al
 
 <br>
 
-Man sieht, dass es einige deutliche Ausreißer gibt. Diese könnten durch andere Systemaktivitäten Hintergrundprozesse verursacht werden. Außerdem interessant sind die unterschiedlichen diskreten Verteilungsgipfel. Grund dafür könnten die unterschiedlichen Cache-Ebenen des Prozessors sein (L1, L2, L3). Der zweithöchste Gipfel bei ca 1.225 µs könnte durch Iterationen in denen ein Interrupt stattgefunden hat verursacht worden sein.
+Man sieht, dass es einige deutliche Ausreißer gibt. Diese könnten durch andere Systemaktivitäten und Hintergrundprozesse verursacht werden. Außerdem interessant sind die unterschiedlichen diskreten Verteilungsgipfel. Grund dafür könnten die unterschiedlichen Cache-Ebenen des Prozessors sein (L1, L2, L3). Der zweithöchste Gipfel bei ca 1.225 µs könnte durch Iterationen in denen ein Interrupt stattgefunden hat verursacht worden sein.
 <br><br>
 
 `ipc-pipe.cpp`
