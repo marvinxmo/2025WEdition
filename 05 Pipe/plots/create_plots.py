@@ -31,7 +31,7 @@ import numpy as np
 
 
 # Constant for the CSV filename: default is ../pipe.csv (one level up from plots/)
-DEFAULT_CSV = Path(__file__).resolve().parent.parent / "ipc_pipe.csv"
+DEFAULT_CSV = Path(__file__).resolve().parent.parent / "pipe.csv"
 
 
 def load_csv(path: Path) -> pd.DataFrame:
@@ -209,6 +209,15 @@ def main():
     plot_time_series(df, outdir / "latency_timeseries.png")
     plot_main_histogram(df, outdir / "latency_main_histogram.png")
     plot_ouliers_histogram(df, outdir / "latency_outliers_histogram.png")
+
+    print("mean: ", df["latency"].mean())
+    print("median: ", df["latency"].median())
+    print("std: ", df["latency"].std())
+    print("min: ", df["latency"].min())
+    print("max: ", df["latency"].max())
+    print("95th percentile: ", np.percentile(df["latency"], 95))
+    print("99th percentile: ", np.percentile(df["latency"], 99))
+    print("99.9th percentile: ", np.percentile(df["latency"], 99.9))
 
 
 if __name__ == "__main__":
