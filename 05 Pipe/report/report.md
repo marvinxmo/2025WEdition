@@ -73,7 +73,7 @@ Es fällt auf, dass die Latenz bei der Messung mit fork() deutlich höher ist al
 
 <br>
 
-Man sieht, dass es einige deutliche Ausreißer gibt. Diese könnten durch andere Systemaktivitäten Hintergrundprozesse verursacht werden. Ausserdem interessant ist sind die unterschiedlichen diskreten Verteilungsgipfel. Grund dafür könnten die unterschiedlichen Cache-Ebenen des Prozessors sein (L1, L2, L3). Der zweithöchste Gipfel bei ca 1.225 µs könnte durch Interationen in denen ein Interrupt stattgefunden hat verursacht worden sein.
+Man sieht, dass es einige deutliche Ausreißer gibt. Diese könnten durch andere Systemaktivitäten Hintergrundprozesse verursacht werden. Außerdem interessant sind die unterschiedlichen diskreten Verteilungsgipfel. Grund dafür könnten die unterschiedlichen Cache-Ebenen des Prozessors sein (L1, L2, L3). Der zweithöchste Gipfel bei ca 1.225 µs könnte durch Iterationen in denen ein Interrupt stattgefunden hat verursacht worden sein.
 <br><br>
 
 `ipc-pipe.cpp`
